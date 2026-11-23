@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NoteCard from "./NoteCard.jsx";
 
 function Notes() {
@@ -16,6 +16,10 @@ function Notes() {
   ]);
   const [search, setSearch] = useState("");
   const [formData, setFormData] = useState({ title: "", body: "" });
+
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
 
   const filteredNotes = notes.filter((note) =>
     note.title.toLowerCase().includes(search.toLowerCase()),
