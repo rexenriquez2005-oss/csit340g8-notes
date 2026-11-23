@@ -26,6 +26,14 @@ function Notes() {
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
 
+  useEffect(() => {
+    const id = setTimeout(() => {
+      localStorage.setItem("draft", JSON.stringify(formData));
+      console.log("draft saved:", formData.title);
+    }, 1000);
+    return () => clearTimeout(id);
+  }, [formData]);
+
   const filteredNotes = notes.filter((note) =>
     note.title.toLowerCase().includes(search.toLowerCase()),
   );
