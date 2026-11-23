@@ -20,7 +20,10 @@ function Notes() {
   });
 
   const [search, setSearch] = useState("");
-  const [formData, setFormData] = useState({ title: "", body: "" });
+  const [formData, setFormData] = useState(() => {
+    const saved = localStorage.getItem("draft");
+    return saved ? JSON.parse(saved) : { title: "", body: "" };
+  });
   const titleRef = useRef(null);
 
   useEffect(() => {
